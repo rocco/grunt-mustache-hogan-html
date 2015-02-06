@@ -101,8 +101,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality.
 Lint and test your code
 
-## Release History
-_(Nothing yet)_
-
 ## Props
 This project is based on [grunt-mustache-html by zhongyu](https://github.com/haio/grunt-mustache-html)
