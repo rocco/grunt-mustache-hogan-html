@@ -23,26 +23,20 @@ var grunt = require('grunt');
 */
 
 exports.mustache_hogan_html = {
+
   setUp: function(done) {
     // setup here if necessary
     done();
   },
+
   default_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('dist/default.html');
+    var actual = grunt.file.read('test/dist/default.html');
     var expected = grunt.file.read('test/expected/default.html');
     test.equal(actual, expected, 'page created.');
 
     test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom.html');
-    var expected = grunt.file.read('test/expected/custom.html');
-    test.equal(actual, expected, 'page created.');
-
-    test.done();;
   }
+
 };

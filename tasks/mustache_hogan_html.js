@@ -14,22 +14,17 @@
 
 'use strict';
 
-module.exports = function(grunt) {
-
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
-  grunt.registerMultiTask('mustache_hogan_html', 'Compile Mustache templates to HTML unsing Hogan.js', function() {
+module.exports = function (grunt) {
+  grunt.registerMultiTask('mustache_hogan_html', 'Compile Mustache templates to HTML unsing Hogan.js', function () {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      src: 'src',
-      dist: 'dist',
-      type: 'mustache'
-    });
-
-    var globals = this.data.globals || {};
-
-    var hogan = require('hogan.js'),
+          src: 'src',
+          dist: 'dist',
+          type: 'mustache'
+        }),
+        // global data from Gruntfile
+        globals = this.data.globals || {},
+        hogan = require('hogan.js'),
         jstSuffix = '.' + options.type,
         matcher = new RegExp('\\' + jstSuffix + '$');
 
@@ -53,9 +48,7 @@ module.exports = function(grunt) {
 
             console.log('-- compiling partial: %s', filename);
             allPartials[partialName] = hogan.compile(partialSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
-
         });
-
         return allPartials;
     };
 
@@ -76,15 +69,13 @@ module.exports = function(grunt) {
 
             var pageName = filename.replace(matcher, ''),
                 pageSrc = grunt.file.read(abspath),
-                pageData = {},
                 dataPath = abspath.replace(matcher, '.json'),
-                locals = merge({}, globals);
+                locals = merge({}, globals),
+                compiledPage = hogan.compile(pageSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
 
-            console.log('-- compiling page: %s', filename);
-            var compiledPage = hogan.compile(pageSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
+            console.log('-- compiled page: %s', filename);
 
             // read page data from {pageName}.json
-
             console.log('--- looking for page data in: %s', dataPath);
             if (grunt.file.exists(dataPath)) {
                 pageData = JSON.parse(grunt.file.read(dataPath), function (key, value) {
@@ -98,15 +89,11 @@ module.exports = function(grunt) {
                     return value;
                 });
                 merge(locals, pageData);
-                pageData[pageName] = locals;
+                pageData[pageName] = merge(locals, pageData);
             }
-
             allPages[pageName] = compiledPage.render(locals, allPartials);
-
         });
-
         return allPages;
-
     };
 
     var each = function (obj, iter) {
@@ -117,33 +104,33 @@ module.exports = function(grunt) {
     };
 
     var merge = function (init, extended) {
-      each(extended, function(v, k) {
+      each(extended, function (v, k) {
         init[k] = v;
       });
-
       return init;
     };
 
-    // get paths
     var layoutPath  = options.src + '/layout' + jstSuffix,
         pagePath    = options.src + '/pages',
-        partialPath = options.src + '/partials';
+        partialPath = options.src + '/partials',
 
-    // render partials and pages with partial data
-    var pageData = {}, // filled in compilePages
+        // render partials and pages with partial data
+        pageData = {}, // filled in compilePages
         partials = compilePartials(partialPath),
-        pages    = compilePages(pagePath, partials);
+        pages    = compilePages(pagePath, partials),
 
-    // get layout and compile it
-    var layoutSrc  = grunt.file.read(layoutPath),
+        // get layout and compile it
+        layoutSrc  = grunt.file.read(layoutPath),
         layoutComp = hogan.compile(layoutSrc); //, { sectionTags: [{o:'_i', c:'i'}] });
 
     // for each page (which are only partials after all) render an HTML file
     each(pages, function (page, name) {
         // add page as a partial called {{>content}}
         partials.content = page;
+
         // render actual page using layout and all partials (including pages now)
         var htmlContent = layoutComp.render(pageData[name] || {}, partials);
+
         // write HTML file
         grunt.file.write(options.dist  + '/' + name + '.html', htmlContent);
         console.log('wrote HTML file: %s', options.dist  + '/' + name + '.html');

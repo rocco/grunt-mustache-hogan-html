@@ -38,14 +38,8 @@ module.exports = function(grunt) {
     mustache_hogan_html: {
       default_options: {
         options: {
-            src: 'test/fixtures/default'
-        }
-      },
-      custom_options: {
-        options: {
-            src: 'test/fixtures/custom',
-            dist: 'tmp',
-            type: 'hbs'
+            src: 'test/src',
+            dist: 'test/dist',
         },
         globals: {
           dev: 'this is global'
