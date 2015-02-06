@@ -1,0 +1,53 @@
+{
+  "name": "grunt-mustache-hogan-html",
+  "description": "Grunt task to build static HTML from Mustache templates using Hogan.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/rocco/grunt-mustache-hogan-html",
+  "author": {
+    "name": "rocco",
+    "email": "rocco@pavingways.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rocco/grunt-mustache-hogan-html.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rocco/grunt-mustache-hogan-html/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/rocco/grunt-mustache-hogan-html/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "hogan.js": "~2.0.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "readme": "# grunt-mustache-hogan-html\n\n> Compile mustache or hbs templates.\n\n## Getting Started\nThis plugin requires Grunt `~0.4.2`\n\nIf you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:\n\n```shell\nnpm install grunt-mustache-hogan-html --save-dev\n```\n\nOnce the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:\n\n```js\ngrunt.loadNpmTasks('grunt-mustache-hogan-html');\n```\n\n## The \"mustache_hogan_html\" task\n\n### Overview\nGenerate static HTML file from mustache|hbs JST for static HTML docs.\n\n```js\ngrunt.initConfig({\n  mustache_hogan_html: {\n    development: {\n      options: {\n        src: 'src',\n        dist: 'dist',\n        type: 'mustache' // mustache Or hbs\n      },\n      globals: {\n        analytics_id: 'UA-123456-1'\n      }\n    }\n  }\n});\n```\n\nNow the subtask `mustache_hogan_html:development` is available.\n\n### options\n\n#### options.src\nType: `String`\nDefault value: `src`\n\nThe source directory of your templates, the directory should be structured like:\n\n```js\n.\n├── layout.mustache\n├── pages\n│   └── index.json\n│   └── index.mustache\n└── partials\n    ├── nav.json\n    └── nav.mustache\n```\n\n* `layout.mustache` must exist, and its name should have prefix `layout`\n* `pages` contains the page templates that eventually created, `.json` contains the page specify data\nwhich can be also rendered in layout page.\n* `partials` contains the partial templates that might be used in the page templates,`.json` contains the json format data, its name must be the save with the partial.\n\n#### options.dist\nType: `String`\nDefault value: `dist`\n\nThe destination directory of the crated HTML files.\n\n#### options.type\nType: `String`\nDefault value: `mustache`\n\nThe type of JST, can be `mustache` or `hbs`.\n\n#### globals\nType: `Object`\nDefault value: {}\n\nContains global data. May be used to define environment-specific variables\n\n## Test\nRun `grunt test`.\n\n## Contributing\nIn lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).\n\n## Release History\n_(Nothing yet)_\n",
+  "readmeFilename": "README.md",
+  "_id": "grunt-mustache-hogan-html@0.1.8",
+  "dist": {
+    "shasum": "2a4b4bef4893bac05098dfdb9c24d5c97bc285b4"
+  },
+  "_from": "grunt-mustache-hogan-html@",
+  "_resolved": "https://registry.npmjs.org/grunt-mustache-hogan-html/-/grunt-mustache-hogan-html-0.1.8.tgz"
+}
