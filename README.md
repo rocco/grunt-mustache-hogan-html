@@ -1,6 +1,6 @@
 # grunt-mustache-hogan-html
 
-Compiles static HTML files from a defined structure of mustache or hbs templates using Hogan.js.
+Compiles static HTML files from a defined structure of mustache templates using Hogan.js.
 Also provides a base layout fir all generated files. 
 
 Works nice for HTML docs or clickdummies.
@@ -23,7 +23,7 @@ grunt.loadNpmTasks('grunt-mustache-hogan-html');
 ## The "mustache_hogan_html" task
 
 ### Overview
-Generate static HTML files from mustache|hbs templates using Hogan.js.
+Generate static HTML files from mustache templates using Hogan.js.
 Make use of layouts and nested partials.
 
 ```js
@@ -32,8 +32,7 @@ grunt.initConfig({
     development: {
       options: {
         src: 'src',
-        dist: 'dist',
-        type: 'mustache' // mustache or hbs
+        dist: 'dist'
       },
       globals: {
         analytics_id: 'UA-123456-1'
@@ -77,12 +76,6 @@ Type: `String`
 Default value: `dist`
 
 Destination directory of rendered HTML files.
-
-#### options.type
-Type: `String`
-Default value: `mustache`
-
-The type of template, can be `mustache` or `hbs`.
 
 #### globals
 Type: `Object`

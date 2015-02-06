@@ -19,7 +19,7 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('mustache_hogan_html', 'Compile mustache|hbs templates to HTML unsing Hogan.js', function() {
+  grunt.registerMultiTask('mustache_hogan_html', 'Compile Mustache templates to HTML unsing Hogan.js', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       src: 'src',
@@ -37,7 +37,6 @@ module.exports = function(grunt) {
     var compilePartials = function (partialPath) {
 
         console.log('- using partial path: %s', partialPath);
-
         var allPartials = {};
 
         // for all files in dir
@@ -64,7 +63,6 @@ module.exports = function(grunt) {
     var compilePages = function (pagesPath, allPartials) {
 
         console.log('- using pages path: %s', pagesPath);
-
         var allPages = {};
 
         // for all files in dir
@@ -82,14 +80,12 @@ module.exports = function(grunt) {
                 dataPath = abspath.replace(matcher, '.json'),
                 locals = merge({}, globals);
 
-console.log('-- compiling page: %s', filename);
-
+            console.log('-- compiling page: %s', filename);
             var compiledPage = hogan.compile(pageSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
 
             // read page data from {pageName}.json
 
-console.log('--- looking for page data in: %s', dataPath);
-
+            console.log('--- looking for page data in: %s', dataPath);
             if (grunt.file.exists(dataPath)) {
                 pageData = JSON.parse(grunt.file.read(dataPath), function (key, value) {
                     if (value && (typeof value === 'string') && value.indexOf('function') === 0) {
@@ -109,56 +105,9 @@ console.log('--- looking for page data in: %s', dataPath);
 
         });
 
-//console.log(allPages);
-
         return allPages;
 
     };
-/*
-    var renderPages = function (path, partials) {
-console.log('rendering path: ', path);
-        var pages = {}; 
-        grunt.file.recurse(path, function (abspath, rootdir, subdir, filename) {
-
-            if (!filename.match(matcher)) {
-                return;
-            }
-
-            var name = filename.replace(matcher, ''),
-                dataPath = abspath.replace(matcher, '.json'),
-                locals = merge({}, globals),
-                data   = {};
-
-console.log('compiling %s', abspath);
-
-            var templateSrc = grunt.file.read(abspath),
-                template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
-
-            if (grunt.file.exists(dataPath)) {
-                data = JSON.parse(grunt.file.read(dataPath), function (key, value) {
-                    if (value && (typeof value === 'string') && value.indexOf('function') === 0) {
-                        try {
-                            return new Function('return ' + value)();
-                        } catch (ex) {
-                            //faulty function, just return it as a raw value
-                        }
-                    }
-                    return value;
-                });
-                merge(locals, data);
-                pageData[name] = locals;
-            }
-
-            pages[name] = template.render(locals, partials);
-        });
-        if (!partials) {
-console.log('recursing: ', path);
-            return renderPages(path, pages);
-        } else {
-            return pages;
-        }
-    };
-*/
 
     var each = function (obj, iter) {
         var keys = Object.keys(obj);
@@ -174,16 +123,6 @@ console.log('recursing: ', path);
 
       return init;
     };
-
-
-
-
-
-
-
-
-
-
 
     // get paths
     var layoutPath  = options.src + '/layout' + jstSuffix,
@@ -209,8 +148,6 @@ console.log('recursing: ', path);
         grunt.file.write(options.dist  + '/' + name + '.html', htmlContent);
         console.log('wrote HTML file: %s', options.dist  + '/' + name + '.html');
     });
-
- 
 
   });
 };

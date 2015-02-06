@@ -1,7 +1,7 @@
 {
   "name": "grunt-mustache-hogan-html",
   "description": "Grunt task to build static HTML from Mustache templates using Hogan.js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/rocco/grunt-mustache-hogan-html",
   "author": {
     "name": "rocco",
@@ -40,7 +40,12 @@
     "grunt": "~0.4.2"
   },
   "keywords": [
-    "gruntplugin"
+    "grunt",
+    "mustache",
+    "hogan",
+    "static",
+    "html",
+    "layouts"
   ],
   "readmeFilename": "README.md",
   "_id": "grunt-mustache-hogan-html@0.1.8",
