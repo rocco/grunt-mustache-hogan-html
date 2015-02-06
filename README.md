@@ -1,6 +1,9 @@
 # grunt-mustache-hogan-html
 
-> Compile mustache or hbs templates using Hogan.js
+Compiles static HTML files from a defined structure of mustache or hbs templates using Hogan.js.
+Also provides a base layout fir all generated files. 
+
+Works nice for HTML docs or clickdummies.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
