@@ -1,9 +1,12 @@
 # grunt-mustache-hogan-html
 
+[![bitHound Score](https://www.bithound.io/rocco/grunt-mustache-hogan-html/badges/score.svg)](https://www.bithound.io/rocco/grunt-mustache-hogan-html)
+
 Compiles static HTML files from a defined structure of mustache templates using Hogan.js.
 Also provides a base layout fir all generated files. 
 
 Works nice for HTML docs or clickdummies.
+
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
