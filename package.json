@@ -1,57 +1,57 @@
 {
-  "name": "grunt-mustache-hogan-html",
-  "description": "Grunt task to build static HTML from Mustache templates using Hogan.js",
-  "version": "0.1.4",
-  "homepage": "https://github.com/rocco/grunt-mustache-hogan-html",
-  "author": {
-    "name": "rocco",
-    "email": "rocco@pavingways.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rocco/grunt-mustache-hogan-html.git"
-  },
-  "bugs": {
-    "url": "https://github.com/rocco/grunt-mustache-hogan-html/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/rocco/grunt-mustache-hogan-html/blob/master/LICENSE-MIT"
-    }
-  ],
-  "main": "Gruntfile.js",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "scripts": {
-    "test": "grunt test"
-  },
-  "dependencies": {
-    "hogan.js": "~2.0.0"
-  },
-  "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt": "~0.4.2"
-  },
-  "peerDependencies": {
-    "grunt": "~0.4.2"
-  },
-  "keywords": [
-    "grunt",
-    "mustache",
-    "hogan",
-    "static",
-    "html",
-    "layouts"
-  ],
-  "readmeFilename": "README.md",
-  "_id": "grunt-mustache-hogan-html@0.1.8",
-  "dist": {
-    "shasum": "2a4b4bef4893bac05098dfdb9c24d5c97bc285b4"
-  },
-  "_from": "grunt-mustache-hogan-html@",
-  "_resolved": "https://registry.npmjs.org/grunt-mustache-hogan-html/-/grunt-mustache-hogan-html-0.1.8.tgz"
+	"name": "grunt-mustache-hogan-html",
+	"description": "Grunt task to build static HTML from Mustache templates using Hogan.js",
+	"version": "0.1.5",
+	"homepage": "https://github.com/rocco/grunt-mustache-hogan-html",
+	"author": {
+		"name": "rocco",
+		"email": "rocco@pavingways.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rocco/grunt-mustache-hogan-html.git"
+	},
+	"bugs": {
+		"url": "https://github.com/rocco/grunt-mustache-hogan-html/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/rocco/grunt-mustache-hogan-html/blob/master/LICENSE-MIT"
+		}
+	],
+	"main": "Gruntfile.js",
+	"engines": {
+		"node": ">= 0.8.0"
+	},
+	"scripts": {
+		"test": "grunt test"
+	},
+	"dependencies": {
+		"hogan.js": "~3.0.0"
+	},
+	"devDependencies": {
+		"grunt-contrib-jshint": "~0.11.0",
+		"grunt-contrib-clean": "~0.6.0",
+		"grunt-contrib-nodeunit": "~0.4.1",
+		"grunt": "~0.4.5"
+	},
+	"peerDependencies": {
+		"grunt": "~0.4.5"
+	},
+	"keywords": [
+		"grunt",
+		"mustache",
+		"hogan",
+		"static",
+		"html",
+		"layouts"
+	],
+	"readmeFilename": "README.md",
+	"_id": "grunt-mustache-hogan-html@0.1.8",
+	"dist": {
+		"shasum": "2a4b4bef4893bac05098dfdb9c24d5c97bc285b4"
+	},
+	"_from": "grunt-mustache-hogan-html@",
+	"_resolved": "https://registry.npmjs.org/grunt-mustache-hogan-html/-/grunt-mustache-hogan-html-0.1.8.tgz"
 }

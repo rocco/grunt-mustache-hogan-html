@@ -9,15 +9,14 @@ Works nice for HTML docs or clickdummies.
 
 
 ## Getting Started
-This plugin requires Grunt `~0.4.2`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+This is a plugin for [Grunt](http://gruntjs.com/getting-started).
+Install this plugin with this command:
 
 ```shell
 npm install grunt-mustache-hogan-html --save-dev
 ```
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once the plugin has been installed, it may be enabled inside your `Gruntfile.js` like this:
 
 ```js
 grunt.loadNpmTasks('grunt-mustache-hogan-html');
@@ -58,6 +57,7 @@ The source directory of your templates, the directory should be structured like:
 ```txt
 src/
  ├── layout.mustache
+ ├── globals.json
  ├── pages
  │   └── index.json
  │   └── index.mustache
@@ -69,10 +69,11 @@ src/
      └── footer.mustache
 ```
 
-* `layout.mustache` must exist 
-* `pages` folder contains the page templates that are transformed into HTML files
-* `.json` files in `pages` folder contain page specify data, can be also rendered in layout page
-* `partials` contains the partial templates that might be used in the page templates
+* `layout.mustache` must exist and contain `{{> content}}` to put page content in
+* `globals.json` is optional and contains global values for mustache variables
+* `pages/` contains page templates that are transformed into HTML files
+* `pages/*.json` files contain page-specific data, can be also rendered in the layout
+* `partials/` contains the partial templates that might be used in the page templates
 
 #### options.dist
 Type: `String`
@@ -84,7 +85,8 @@ Destination directory of rendered HTML files.
 Type: `Object`
 Default value: {}
 
-Contains global data. Same keys will be overwritten by page-specific values from `.json` files.
+Contains global data. 
+Keys can be overwritten with values from `globals.json` and page-specific values from `pages/*.json` files.
 
 ## Test
 
@@ -93,9 +95,11 @@ grunt test
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality.
-Lint and test your code
+You are very welcome to contribute!
+Stick to the existing coding style.
+Add unit tests for new functionality.
+Lint your code.
 
 ## Props
-This project is based on [grunt-mustache-html by zhongyu](https://github.com/haio/grunt-mustache-html)
+This project is based on [grunt-mustache-html by zhongyu](https://github.com/haio/grunt-mustache-html).
+Due to heavy restructuring and functionality changes this is no regular fork anymore.
