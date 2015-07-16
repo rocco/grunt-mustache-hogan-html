@@ -2,10 +2,12 @@
 
 [![bitHound Score](https://www.bithound.io/rocco/grunt-mustache-hogan-html/badges/score.svg)](https://www.bithound.io/rocco/grunt-mustache-hogan-html)
 
-Compiles static HTML files from a defined structure of mustache templates using Hogan.js.
-Also provides a base layout fir all generated files. 
+Compiles *static HTML* files from a defined structure of *Mustache templates* using a *common base layout*.
+As a result you get several HTML pages you can link to from each other: *a working HTML click-dummy*.
 
-Works nice for HTML docs or clickdummies.
+Great for generating Front-End mockups or HTML documentations etc.
+
+Uses Hogan.js to compile Mustache.
 
 
 ## Getting Started
