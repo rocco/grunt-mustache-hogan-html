@@ -65,6 +65,17 @@ exports.mustache_hogan_html = {
 			'page content mismatch'
 		);
 		test.done();
+	},
+
+	sub_sub_project: function (test) {
+
+		test.expect(1);
+		test.equal(
+			grunt.file.read('test/dist/subproject2/evensubbier/info.html'),
+			grunt.file.read('test/expected/subproject2/evensubbier/info.html'),
+			'page content mismatch'
+		);
+		test.done();
 	}
 
 };

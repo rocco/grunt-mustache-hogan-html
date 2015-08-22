@@ -146,7 +146,7 @@ module.exports = function (grunt) {
 		each(pages, function (page, name) {
 
 			// get layout for this sub-project and compile it
-			var layoutSuffix = name.substring(0, name.indexOf('/')),
+			var layoutSuffix = name.substring(0, name.lastIndexOf('/')).replace('/', '-'),
 			    layoutPath = options.src + '/layout' + (layoutSuffix !== '' ? '-' + layoutSuffix : '') + tplFiletype,
 			    layoutSrc = grunt.file.exists(layoutPath) ? grunt.file.read(layoutPath) : grunt.file.read(options.src + '/layout' + tplFiletype),
 			    layoutComp = Hogan.compile(layoutSrc);

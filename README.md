@@ -4,7 +4,8 @@
 
 Compiles *static HTML* files from a defined structure of *Mustache templates* using a *common base layout*.
 As a result you get several HTML pages you can link to from each other: *a working HTML click-dummy*.
-Now even with sub projects in directories below.
+Pages can be rendered in folders. 
+The *common base layout* can be overridden for each folder.
 
 Great for generating Front-End mockups, HTML documentation etc.
 
@@ -60,14 +61,15 @@ The source directory of your templates, the directory should be structured like:
 
 ```txt
 src/
- ├── layout.mustache
+ ├── layout.mustache *
+ ├── layout-somepath.mustache
  ├── globals.json
- ├── pages
+ ├── pages *
  │   └── somepath/
  │   │   └── index.json
  │   │   └── index.mustache
  │   └── index.json
- │   └── index.mustache
+ │   └── index.mustache *
  │   └── 404.json
  │   └── 404.mustache
  └── partials
@@ -79,13 +81,18 @@ src/
      └── footer.mustache
 ```
 
-* `layout.mustache` must exist and contain `{{> content}}` to put page content in
-* `layout[-somepath].mustache` can exist to render sub projects
+An * means this is required.
+
+* `layout.mustache` base layout must exist and contain `{{>content}}` for page content
+* `layout-somepath.mustache` defines a special layouts for pages in `somepath/`
 * `globals.json` is optional and contains global values for mustache variables
 * `pages/` contains page templates that are transformed into HTML files
 * `pages/*.json` files contain page-specific data, can be also rendered in the layout
+* pages can be put into sub-folders. every folder can have a special layout (cf. above)
 * `partials/` contains the partial templates that might be used in the page templates
-* partials can be structured in subfolders. include them like this: {{>subfolder/patial1}}
+* partials can be structured in sub-folders. include them like: `{{>subfolder/partial1}}`
+
+Please refer to the `test/` folder for a complete example.
 
 #### options.dist
 Type: `String`
