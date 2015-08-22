@@ -1,7 +1,7 @@
 {
 	"name": "grunt-mustache-hogan-html",
 	"description": "Grunt task to build static HTML from Mustache templates using Hogan.js",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"homepage": "https://github.com/rocco/grunt-mustache-hogan-html",
 	"author": {
 		"name": "rocco",
