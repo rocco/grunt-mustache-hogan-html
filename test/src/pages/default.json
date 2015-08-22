@@ -1,8 +1,8 @@
 {
-    "hi": "Hello There!",
-    "titletag": "default page title",
-    "items" : [
-      {"name": "main", "link": "index.html"},
-      {"name": "inner", "link": "inner.html"}
-    ]
+	"hi": "Hello There!",
+	"titletag": "default page title",
+	"items" : [
+		{"name": "sub project one", "link": "subproject1/index.html"},
+		{"name": "sub project two", "link": "subproject2/index.html"}
+	]
 }

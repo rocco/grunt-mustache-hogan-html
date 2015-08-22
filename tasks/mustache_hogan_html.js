@@ -1,14 +1,14 @@
 /*
  * grunt-mustache-hogan-html
  * https://github.com/rocco/grunt-mustache-hogan-html
- * 
+ *
  * Copyright (c) 2015 Rocco Georgi
- * 
+ *
  * based on grunt-mustache-html
  * https://github.com/haio/grunt-mustache-html
  *
  * Copyright (c) 2013 zhongyu
- 
+
  * Licensed under the MIT license.
  */
 
@@ -28,8 +28,8 @@ module.exports = function (grunt) {
 		    gruntGlobals = this.data.globals || {},
 		    // fileGlobals wil be filled from file in [src]/globals.json
 		    fileGlobals = {},
-		    jstSuffix = '.' + options.type,
-		    matcher = new RegExp('\\' + jstSuffix + '$');
+		    tplFiletype = '.' + options.type,
+		    tplMatcher = new RegExp('\\' + tplFiletype + '$');
 
 		// Hogan.compile each partial, return object of compiled partials
 		var compilePartials = function (partialPath) {
@@ -40,21 +40,21 @@ module.exports = function (grunt) {
 			var allPartials = {};
 
 			// for all files in dir
-			grunt.file.recurse(partialPath, function (abspath, rootdir, subdir, filename) {
+			grunt.file.recurse(partialPath, function (absPath, rootDir, subDir, fileName) {
 
 				// file extension does not match
-				if (!filename.match(matcher)) {
+				if (!fileName.match(tplMatcher)) {
 					if (options.verbose) {
-						grunt.log.writeln('-- ignoring file: %s', filename);
+						grunt.log.writeln('-- ignoring file: %s', fileName);
 					}
 					return;
 				}
 
-				var partialName = filename.replace(matcher, ''),
-				    partialSrc = grunt.file.read(abspath);
+				var partialName = absPath.replace(rootDir, '').replace(tplMatcher, '').substring(1),
+				    partialSrc = grunt.file.read(absPath);
 
 				if (options.verbose) {
-					grunt.log.writeln('-- compiling partial: %s', filename);
+					grunt.log.writeln('-- compiling partial: %s', partialName);
 				}
 				allPartials[partialName] = Hogan.compile(partialSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
 			});
@@ -75,24 +75,24 @@ module.exports = function (grunt) {
 			}
 
 			// for all files in dir
-			grunt.file.recurse(pagesPath, function (abspath, rootdir, subdir, filename) {
+			grunt.file.recurse(pagesPath, function (absPath, rootDir, subDir, fileName) {
 
 				// file extension does not match - ignore
-				if (!filename.match(matcher)) {
+				if (!fileName.match(tplMatcher)) {
 					if (options.verbose) {
-						grunt.log.writeln('-- ignoring file: %s', filename);
+						grunt.log.writeln('-- ignoring file: %s', fileName);
 					}
 					return;
 				}
 
-				var pageName = filename.replace(matcher, ''),
-				    pageSrc = grunt.file.read(abspath),
+				var pageName = absPath.replace(rootDir, '').replace(tplMatcher, '').substring(1),
+				    pageSrc = grunt.file.read(absPath),
 				    pageJson = {},
-				    dataPath = abspath.replace(matcher, '.json'),
+				    dataPath = absPath.replace(tplMatcher, '.json'),
 				    compiledPage = Hogan.compile(pageSrc); // , { sectionTags: [{o:'_i', c:'i'}] }
 
 				if (options.verbose) {
-					grunt.log.writeln('-- compiled page: %s', filename);
+					grunt.log.writeln('-- compiled page: %s', pageName);
 				}
 
 				// read page data from {pageName}.json
@@ -102,6 +102,10 @@ module.exports = function (grunt) {
 					}
 					pageJson = grunt.file.readJSON(dataPath);
 					pageData[pageName] = mergeObj(gruntGlobals, pageJson);
+
+					if (options.verbose) {
+						grunt.log.writeln('--- json for %s', pageName, pageData[pageName]);
+					}
 				} else {
 					pageData[pageName] = gruntGlobals;
 				}
@@ -130,20 +134,23 @@ module.exports = function (grunt) {
 			return retObj;
 		};
 
-		var layoutPath = options.src + '/layout' + jstSuffix,
-		    pagePath = options.src + '/pages',
+		var pagePath = options.src + '/pages',
 		    partialPath = options.src + '/partials',
 		    // render partials and pages with partial data
 		    pageData = {}, // filled in compilePages
 		    partials = compilePartials(partialPath),
-		    pages = compilePages(pagePath, partials),
-		    // get layout and compile it
-		    layoutSrc = grunt.file.read(layoutPath),
-		    layoutComp = Hogan.compile(layoutSrc);
+		    pages = compilePages(pagePath, partials);
 
 		// for each page (which are only partials after all) render an HTML file
 		var fileCount = 0;
 		each(pages, function (page, name) {
+
+			// get layout for this sub-project and compile it
+			var layoutSuffix = name.substring(0, name.indexOf('/')),
+			    layoutPath = options.src + '/layout' + (layoutSuffix !== '' ? '-' + layoutSuffix : '') + tplFiletype,
+			    layoutSrc = grunt.file.exists(layoutPath) ? grunt.file.read(layoutPath) : grunt.file.read(options.src + '/layout' + tplFiletype),
+			    layoutComp = Hogan.compile(layoutSrc);
+
 			// add page as a partial called {{>content}}
 			partials.content = page;
 
@@ -151,6 +158,9 @@ module.exports = function (grunt) {
 			var htmlContent = layoutComp.render(pageData[name] || {}, partials);
 
 			// write HTML file
+			if (options.verbose) {
+				grunt.log.writeln('will write page with name %s', name, page);
+			}
 			grunt.file.write(options.dist  + '/' + name + '.html', htmlContent);
 			if (options.verbose) {
 				grunt.log.writeln('wrote HTML file: %s', options.dist  + '/' + name + '.html');

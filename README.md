@@ -4,8 +4,9 @@
 
 Compiles *static HTML* files from a defined structure of *Mustache templates* using a *common base layout*.
 As a result you get several HTML pages you can link to from each other: *a working HTML click-dummy*.
+Now even with sub projects in directories below.
 
-Great for generating Front-End mockups or HTML documentations etc.
+Great for generating Front-End mockups, HTML documentation etc.
 
 Uses Hogan.js to compile Mustache.
 
@@ -27,7 +28,7 @@ grunt.loadNpmTasks('grunt-mustache-hogan-html');
 ## The "mustache_hogan_html" task
 
 ### Overview
-Generate static HTML files from mustache templates using Hogan.js.
+Generate static HTML files from mustache templates.
 Make use of layouts and nested partials.
 
 ```js
@@ -46,7 +47,8 @@ grunt.initConfig({
 });
 ```
 
-Now the subtask `mustache_hogan_html:development` is available. Add further targets (such as `build` as desired).
+Now the subtask `mustache_hogan_html:development` is available.
+Add further targets (such as `build` as desired).
 
 ### Options object
 
@@ -61,21 +63,29 @@ src/
  ├── layout.mustache
  ├── globals.json
  ├── pages
+ │   └── somepath/
+ │   │   └── index.json
+ │   │   └── index.mustache
  │   └── index.json
  │   └── index.mustache
  │   └── 404.json
  │   └── 404.mustache
  └── partials
+     └── subfolder/
+     │   └── partial1.mustache
+     │   └── partial2.mustache
      └── header.mustache
      └── nav.mustache
      └── footer.mustache
 ```
 
 * `layout.mustache` must exist and contain `{{> content}}` to put page content in
+* `layout[-somepath].mustache` can exist to render sub projects
 * `globals.json` is optional and contains global values for mustache variables
 * `pages/` contains page templates that are transformed into HTML files
 * `pages/*.json` files contain page-specific data, can be also rendered in the layout
 * `partials/` contains the partial templates that might be used in the page templates
+* partials can be structured in subfolders. include them like this: {{>subfolder/patial1}}
 
 #### options.dist
 Type: `String`
@@ -104,4 +114,4 @@ Lint your code.
 
 ## Props
 This project is based on [grunt-mustache-html by zhongyu](https://github.com/haio/grunt-mustache-html).
-Due to heavy restructuring and functionality changes this is no regular fork anymore.
+Due to heavy restructuring and functionality changes this is no regular fork.

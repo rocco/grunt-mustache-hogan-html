@@ -1,0 +1,9 @@
+{
+	"hi": "Hello Subproject1!",
+	"titletag": "subproject1 page title",
+	"items" : [
+		{"name": "this", "link": "index.html"},
+		{"name": "sub-project 2", "link": "../subproject2/index.html"},
+		{"name": "home page", "link": "../default.html"}
+	]
+}

@@ -1,14 +1,14 @@
 /*
  * grunt-mustache-hogan-html
  * https://github.com/rocco/grunt-mustache-hogan-html
- * 
+ *
  * Copyright (c) 2015 Rocco Georgi
- * 
+ *
  * based on grunt-mustache-html
  * https://github.com/haio/grunt-mustache-html
  *
  * Copyright (c) 2013 zhongyu
- 
+
  * Licensed under the MIT license.
  */
 
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 
 		// Before generating any new files, remove any previously-created files.
 		clean: {
-			tests: ['tmp', 'dist'],
+			tests: ['test/dist'],
 		},
 
 		// Configuration to be run (and then tested).
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 
 	// Whenever the "test" task is run, first clean the "tmp" dir, then run this
 	// plugin's task(s), then test the result.
-	grunt.registerTask('test', ['clean', 'mustache_hogan_html', 'nodeunit', 'clean']);
+	grunt.registerTask('test', ['clean', 'mustache_hogan_html', 'nodeunit']);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['jshint', 'test']);
