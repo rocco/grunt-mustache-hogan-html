@@ -101,6 +101,10 @@ module.exports = function (grunt) {
 						grunt.log.writeln('--- using page data from: %s', dataPath);
 					}
 					pageJson = grunt.file.readJSON(dataPath);
+
+					// find strings with functions in JSON and replace by its value
+					traverse(pageJson, process);
+
 					pageData[pageName] = mergeObj(gruntGlobals, pageJson);
 
 					if (options.verbose) {
@@ -114,6 +118,28 @@ module.exports = function (grunt) {
 			});
 
 			return allPages;
+		};
+
+		// based on "Traverse all the Nodes of a JSON Object Tree with JavaScript" - http://stackoverflow.com/a/722732
+		// called with every property and it's value
+		var process = function (key, value, o) {
+			if ((typeof value === 'string') && value.indexOf('function') === 0) {
+				try {
+					var newValue = new Function('return ' + value)()();
+					o[key] = newValue;
+				} catch (ex) {
+					//faulty function, just return it as a raw value
+				}
+			}
+		};
+		var traverse = function (o, func) {
+			for (var i in o) {
+				func.apply(this, [i, o[i], o]);
+				if (o[i] !== null && typeof(o[i]) == "object") {
+					//going on step down in the object tree!!
+					traverse(o[i], func);
+				}
+			}
 		};
 
 		var each = function (obj, iter) {
